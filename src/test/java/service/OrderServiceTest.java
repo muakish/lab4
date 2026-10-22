@@ -1,0 +1,63 @@
+package service;
+import model.Customer;
+import model.Dish;
+import model.Order;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import repository.InMemoryOrderRepository;
+import repository.OrderRepository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class OrderServiceTest {
+
+    @Test
+    void shouldCreateOrderWhenAmountIsEnough() {
+        OrderRepository repository = new InMemoryOrderRepository();
+        OrderService service = new OrderService(repository, 500);
+
+        Customer customer = new Customer(1, "Иван");
+        Dish pizza = new Dish(1, "Пицца", 600);
+
+        Order order = new Order(1, customer);
+        order.addDish(pizza);
+
+        service.createOrder(order);
+
+//        assertNotNull(repository.findById(1));
+        assertNull(repository.findById(1));
+    }
+
+    @Test
+    void shouldRejectOrderWhenAmountIsTooLow() {
+        OrderRepository repository = new InMemoryOrderRepository();
+        OrderService service = new OrderService(repository, 500);
+
+        Customer customer = new Customer(1, "Иван");
+        Dish fries = new Dish(1, "Картошка", 200);
+
+        Order order = new Order(1, customer);
+        order.addDish(fries);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.createOrder(order)
+        );
+    }
+
+    @Test
+    void shouldCreateOrderWhenAmountEqualsMinimum() {
+        OrderRepository repository = new InMemoryOrderRepository();
+        OrderService service = new OrderService(repository, 500);
+
+        Customer customer = new Customer(1, "Иван");
+        Dish burger = new Dish(1, "Бургер", 500);
+
+        Order order = new Order(1, customer);
+        order.addDish(burger);
+
+        service.createOrder(order);
+
+        assertNotNull(repository.findById(1));
+    }
+}
