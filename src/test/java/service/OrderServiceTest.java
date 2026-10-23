@@ -1,9 +1,10 @@
-package service;
+
+        package service;
+
 import model.Customer;
 import model.Dish;
 import model.Order;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import repository.InMemoryOrderRepository;
 import repository.OrderRepository;
 
@@ -25,8 +26,6 @@ public class OrderServiceTest {
         service.createOrder(order);
 
         assertNotNull(repository.findById(1));
-
-        //assertNull(repository.findById(1));
     }
 
     @Test
@@ -44,6 +43,8 @@ public class OrderServiceTest {
                 IllegalArgumentException.class,
                 () -> service.createOrder(order)
         );
+
+        assertNull(repository.findById(1));
     }
 
     @Test
@@ -59,7 +60,7 @@ public class OrderServiceTest {
 
         service.createOrder(order);
 
-        assertNull(repository.findById(1));
+        assertNotNull(repository.findById(1));
     }
 
     @Test
@@ -76,8 +77,7 @@ public class OrderServiceTest {
         order.addDish(fries);
 
         service.createOrder(order);
-        //assertNull(repository.findById(2));
 
-       assertNotNull(repository.findById(2));
+        assertNotNull(repository.findById(2));
     }
 }
