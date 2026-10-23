@@ -77,7 +77,6 @@ public class OrderServiceTest {
         order.addDish(fries);
 
         service.createOrder(order);
-        assertNull(repository.findById(2));
-        // assertNotNull(repository.findById(2));
+        assertNotNull(repository.findById(2));
     }
 }
