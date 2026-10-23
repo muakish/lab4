@@ -58,6 +58,24 @@ public class OrderServiceTest {
 
         service.createOrder(order);
 
-        assertNotNull(repository.findById(1));
+        assertNull(repository.findById(1));
+    }
+
+    @Test
+    void shouldCreateOrderWithTwoDishes() {
+        OrderRepository repository = new InMemoryOrderRepository();
+        OrderService service = new OrderService(repository, 500);
+
+        Customer customer = new Customer(2, "Анна");
+        Dish pizza = new Dish(2, "Пицца", 300);
+        Dish fries = new Dish(3, "Картошка", 300);
+
+        Order order = new Order(2, customer);
+        order.addDish(pizza);
+        order.addDish(fries);
+
+        service.createOrder(order);
+
+        assertNotNull(repository.findById(2));
     }
 }
