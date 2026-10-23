@@ -25,6 +25,7 @@ public class OrderServiceTest {
         service.createOrder(order);
 
         assertNotNull(repository.findById(1));
+
         //assertNull(repository.findById(1));
     }
 
