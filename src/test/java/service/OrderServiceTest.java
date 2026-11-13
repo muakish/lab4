@@ -1,15 +1,7 @@
 
         package service;
 
-import model.Customer;
-import model.Dish;
-import model.Order;
-import org.junit.jupiter.api.Test;
-import repository.InMemoryOrderRepository;
-import repository.OrderRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import static org.junit.jupiter.api.Assertions.*;
+import model.Customer; import model.Dish; import model.Order; import org.junit.jupiter.api.Test; import repository.InMemoryOrderRepository; import repository.OrderRepository; import org.slf4j.Logger; import org.slf4j.LoggerFactory; import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderServiceTest {
 
@@ -19,7 +11,7 @@ public class OrderServiceTest {
     @Test
     void shouldCreateOrderWhenAmountIsEnough() {
         OrderRepository repository = new InMemoryOrderRepository();
-        OrderService service = new OrderService(repository, 500);
+        OrderService service = new OrderService(repository, 500); ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         Customer customer = new Customer(1, "Иван");
         Dish pizza = new Dish(1, "Пицца", 600);
