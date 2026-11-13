@@ -30,7 +30,7 @@ public class OrderServiceTest {
         service.createOrder(order);
 
         try {
-            assertNull(repository.findById(1));
+            assertNotNull(repository.findById(1));
         } catch (AssertionError e) {
             logger.error("ошибка", e);
             throw e;
