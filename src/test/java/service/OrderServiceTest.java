@@ -7,10 +7,14 @@ import model.Order;
 import org.junit.jupiter.api.Test;
 import repository.InMemoryOrderRepository;
 import repository.OrderRepository;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderServiceTest {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(OrderServiceTest.class);
 
     @Test
     void shouldCreateOrderWhenAmountIsEnough() {
@@ -25,7 +29,12 @@ public class OrderServiceTest {
 
         service.createOrder(order);
 
-        assertNotNull(repository.findById(1));
+        try {
+            assertNull(repository.findById(1));
+        } catch (AssertionError e) {
+            logger.error("ошибка", e);
+            throw e;
+        }
     }
 
     @Test
@@ -45,6 +54,7 @@ public class OrderServiceTest {
         );
 
         assertNull(repository.findById(1));
+
     }
 
     @Test

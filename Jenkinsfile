@@ -33,5 +33,10 @@ pipeline {
                 echo "Минимальная сумма заказа: ${params.MIN_ORDER_AMOUNT}"
             }
         }
+
+        stage('Static Analysis') {
+            steps {
+                bat '"D:\\IntelliJ IDEA 2026.2.3\\plugins\\maven-plugin\\lib\\maven3\\bin\\mvn.cmd" checkstyle:check'
+            }
     }
 }
